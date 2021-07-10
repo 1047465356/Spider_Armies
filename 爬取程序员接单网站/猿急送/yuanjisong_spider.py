@@ -21,7 +21,7 @@ class Spider(object):
         # 并发量
         self.CONCURRENCY = 2
         self.semaphore = asyncio.Semaphore(self.CONCURRENCY )
-        self.ua = UserAgent()
+        self.ua = UserAgent(path='fake_useragent.json')
         self.headers = {"User-Agent": self.ua.random}
         self.data = list()
         self.path = "yuanjisong_data.csv"
