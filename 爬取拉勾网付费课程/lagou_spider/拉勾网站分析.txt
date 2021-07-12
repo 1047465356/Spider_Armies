@@ -1,0 +1,37 @@
+列表页url
+#
+# 爬取拉勾网课程
+# 下载链接: https://kaiwu.lagou.com/course/courseInfo.htm?courseId=46#/detail/pc?id=1661
+# 参数加密接请求则'无效访问'
+# 初步判断是 非 jwt 验证网站
+# url待 带有 id (未加密)
+# Ajex接口带有id (未加密)
+# 登录凭证带有加密:authorization: 076bdf878eed7e133ab28740e189f7dc89e1f522a6c6e4e6828c195ee711929b
+# 请求 Ajex 接口,返回 json 里面的 textContent 存放着文本
+# 直接请求 Ajex 接口返回的是'非法的访问'
+# 请求头可能有带验证登录的凭证, cookies 类似的验证机制
+——2021-5-20
+------------------------------------------------
+https://gate.lagou.com/v1/neirong/kaiwu/getCourseLessonDetail?lessonId=1661
+
+请求头必须带上
+x-l-req-header
+
+其他cookies等，可不带
+
+请求成功返回 json 数据
+
+成功在content 里面提取文本
+
+标题 'theme': '第14讲：Selenium 的基本使用'
+日期 'publishDate': '2020/03/27'
+正文 textContent（正文似乎html文本）
+
+不足：分析其中 fileUrl  请求连接下载m3u8文件
+其中
+#EXT-X-KEY:METHOD=AES-128,URI="https://kaiwu.lagou.com/alikey?code=MTIyMjgzZDctNTY0Yy00MTM4LTg2MGMtYmJlN2U1YzFlNTFkQ1ZsNzVqWTVKWVdjYjZXbFZXT2N4QUdXVzNXamRuMFdBQUFBQUFBQUFBQ1M2OG1PWWg0WjJnSGNGeE14RlUxTnBUb25HVlhPZnF6cHd2U3V0UVFLaXFDOWxTRFgrcnB2&vid=c0230c69afda4ba8a2658efa46ec71cf&appId=course"
+请求返回一串加密字符串：eÉÀlX`ƒÓã˜‚šO
+
+未能解密，以后有能力回来破解
+——2021-06-03
+------------------------------------------------
